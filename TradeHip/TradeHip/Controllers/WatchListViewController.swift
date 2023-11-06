@@ -8,11 +8,26 @@
 import UIKit
 
 class WatchListViewController: UIViewController {
-
+    
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setUpSeachController()
+        setUpTitleView()
+    }
+    
+    // MARK: - Private
+    
+    private func setUpTitleView() {
+        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: navigationController?.navigationBar.height ?? 100))
+        let label = UILabel(frame: CGRect(x: 10, y: 0, width: titleView.width - 20, height: titleView.height))
+        label.text = "주식"
+        label.font = UIFont(name: "BMJUAOTF", size: 40)
+        label.textColor = .systemOrange
+
+        navigationItem.titleView = titleView
+        titleView.addSubview(label)
     }
     
     private func setUpSeachController() {
