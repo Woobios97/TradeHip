@@ -21,13 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A5CC5E2B2AF9392E00FD8D85 /* Stocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50B7C8A2AF94DC000225739 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5CC5E2B2AF9392E00FD8D85 /* TradeHip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeHip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5CC5E2E2AF9392E00FD8D85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5CC5E302AF9392E00FD8D85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A5CC5E322AF9392E00FD8D85 /* WatchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListViewController.swift; sourceTree = "<group>"; };
 		A5CC5E372AF9392F00FD8D85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5CC5E3A2AF9392F00FD8D85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A5CC5E3C2AF9392F00FD8D85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5CC5E482AF93C7900FD8D85 /* TopStoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesViewController.swift; sourceTree = "<group>"; };
 		A5CC5E4A2AF93C9B00FD8D85 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		A5CC5E4C2AF93CA700FD8D85 /* StockDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailsViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 		A5CC5E222AF9392E00FD8D85 = {
 			isa = PBXGroup;
 			children = (
-				A5CC5E2D2AF9392E00FD8D85 /* Stocks */,
+				A5CC5E2D2AF9392E00FD8D85 /* TradeHip */,
 				A5CC5E2C2AF9392E00FD8D85 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,22 +58,22 @@
 		A5CC5E2C2AF9392E00FD8D85 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A5CC5E2B2AF9392E00FD8D85 /* Stocks.app */,
+				A5CC5E2B2AF9392E00FD8D85 /* TradeHip.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A5CC5E2D2AF9392E00FD8D85 /* Stocks */ = {
+		A5CC5E2D2AF9392E00FD8D85 /* TradeHip */ = {
 			isa = PBXGroup;
 			children = (
+				A50B7C8A2AF94DC000225739 /* Info.plist */,
 				A5CC5E462AF93B7900FD8D85 /* Other */,
 				A5CC5E422AF93B5000FD8D85 /* Managers */,
 				A5CC5E432AF93B5700FD8D85 /* Controllers */,
 				A5CC5E442AF93B5C00FD8D85 /* Views */,
 				A5CC5E452AF93B6300FD8D85 /* Models */,
-				A5CC5E3C2AF9392F00FD8D85 /* Info.plist */,
 			);
-			path = Stocks;
+			path = TradeHip;
 			sourceTree = "<group>";
 		};
 		A5CC5E422AF93B5000FD8D85 /* Managers */ = {
@@ -125,9 +125,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A5CC5E2A2AF9392E00FD8D85 /* Stocks */ = {
+		A5CC5E2A2AF9392E00FD8D85 /* TradeHip */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A5CC5E3F2AF9392F00FD8D85 /* Build configuration list for PBXNativeTarget "Stocks" */;
+			buildConfigurationList = A5CC5E3F2AF9392F00FD8D85 /* Build configuration list for PBXNativeTarget "TradeHip" */;
 			buildPhases = (
 				A5CC5E272AF9392E00FD8D85 /* Sources */,
 				A5CC5E282AF9392E00FD8D85 /* Frameworks */,
@@ -137,9 +137,9 @@
 			);
 			dependencies = (
 			);
-			name = Stocks;
+			name = TradeHip;
 			productName = Stocks;
-			productReference = A5CC5E2B2AF9392E00FD8D85 /* Stocks.app */;
+			productReference = A5CC5E2B2AF9392E00FD8D85 /* TradeHip.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -157,7 +157,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A5CC5E262AF9392E00FD8D85 /* Build configuration list for PBXProject "Stocks" */;
+			buildConfigurationList = A5CC5E262AF9392E00FD8D85 /* Build configuration list for PBXProject "TradeHip" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -170,7 +170,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A5CC5E2A2AF9392E00FD8D85 /* Stocks */,
+				A5CC5E2A2AF9392E00FD8D85 /* TradeHip */,
 			);
 		};
 /* End PBXProject section */
@@ -346,7 +346,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FQRWL84Z3B;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Stocks/Info.plist;
+				INFOPLIST_FILE = TradeHip/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TradeHip;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -375,7 +377,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FQRWL84Z3B;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Stocks/Info.plist;
+				INFOPLIST_FILE = TradeHip/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TradeHip;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -398,7 +402,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A5CC5E262AF9392E00FD8D85 /* Build configuration list for PBXProject "Stocks" */ = {
+		A5CC5E262AF9392E00FD8D85 /* Build configuration list for PBXProject "TradeHip" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A5CC5E3D2AF9392F00FD8D85 /* Debug */,
@@ -407,7 +411,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A5CC5E3F2AF9392F00FD8D85 /* Build configuration list for PBXNativeTarget "Stocks" */ = {
+		A5CC5E3F2AF9392F00FD8D85 /* Build configuration list for PBXNativeTarget "TradeHip" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A5CC5E402AF9392F00FD8D85 /* Debug */,
