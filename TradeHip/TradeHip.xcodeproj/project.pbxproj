@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A50B7C8D2AF9531600225739 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50B7C8C2AF9531600225739 /* Extensions.swift */; };
 		A50B7C8F2AF954CB00225739 /* BMJUA.otf in Resources */ = {isa = PBXBuildFile; fileRef = A50B7C8E2AF954CB00225739 /* BMJUA.otf */; };
+		A50B7C912AF9584100225739 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50B7C902AF9584100225739 /* SearchResultTableViewCell.swift */; };
 		A5CC5E2F2AF9392E00FD8D85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC5E2E2AF9392E00FD8D85 /* AppDelegate.swift */; };
 		A5CC5E312AF9392E00FD8D85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC5E302AF9392E00FD8D85 /* SceneDelegate.swift */; };
 		A5CC5E332AF9392E00FD8D85 /* WatchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC5E322AF9392E00FD8D85 /* WatchListViewController.swift */; };
@@ -26,6 +27,7 @@
 		A50B7C8A2AF94DC000225739 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A50B7C8C2AF9531600225739 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A50B7C8E2AF954CB00225739 /* BMJUA.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUA.otf; sourceTree = "<group>"; };
+		A50B7C902AF9584100225739 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		A5CC5E2B2AF9392E00FD8D85 /* TradeHip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeHip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5CC5E2E2AF9392E00FD8D85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5CC5E302AF9392E00FD8D85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				A5CC5E392AF9392F00FD8D85 /* LaunchScreen.storyboard */,
+				A50B7C902AF9584100225739 /* SearchResultTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5CC5E532AF9416F00FD8D85 /* HapticsManager.swift in Sources */,
+				A50B7C912AF9584100225739 /* SearchResultTableViewCell.swift in Sources */,
 				A5CC5E4D2AF93CA700FD8D85 /* StockDetailsViewController.swift in Sources */,
 				A5CC5E492AF93C7900FD8D85 /* TopStoriesViewController.swift in Sources */,
 				A5CC5E332AF9392E00FD8D85 /* WatchListViewController.swift in Sources */,
