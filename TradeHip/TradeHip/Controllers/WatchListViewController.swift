@@ -25,13 +25,13 @@ class WatchListViewController: UIViewController {
         label.text = "주식"
         label.font = UIFont(name: "BMJUAOTF", size: 40)
         label.textColor = .systemOrange
+
         navigationItem.titleView = titleView
         titleView.addSubview(label)
     }
     
     private func setUpSeachController() {
         let resultVC = SearchResultsViewController()
-        resultVC.delegate = self
         let searchVC = UISearchController(searchResultsController: resultVC)
         searchVC.searchResultsUpdater = self
         navigationItem.searchController = searchVC
@@ -52,16 +52,8 @@ extension WatchListViewController: UISearchResultsUpdating {
         // 검색을 위한 API call
         
         // 업데이트 resultsController
-        resultVC.update(with: ["GOOG"])
+        
         print(#fileID, #function, #line, "this is - \(query)")
     }
         
-}
-
-extension WatchListViewController: SearchResultsViewControllerDelegate {
-    
-    func searchResultsViewController(searchResult: String) {
-        // 특정 선택 항목에 대한 주식 세부 정보 표시
-    }
-    
 }
