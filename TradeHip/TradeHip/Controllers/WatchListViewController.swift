@@ -33,6 +33,7 @@ class WatchListViewController: UIViewController {
     private func setUpSeachController() {
         let resultVC = SearchResultsViewController()
         let searchVC = UISearchController(searchResultsController: resultVC)
+        resultVC.delegate = self
         searchVC.searchResultsUpdater = self
         navigationItem.searchController = searchVC
     }
@@ -52,8 +53,14 @@ extension WatchListViewController: UISearchResultsUpdating {
         // 검색을 위한 API call
         
         // 업데이트 resultsController
-        
+        resultVC.update(with: ["GOOG"])
         print(#fileID, #function, #line, "this is - \(query)")
     }
         
+}
+
+extension WatchListViewController: SearchResultsViewControllerDelegate {
+    func searchResultsViewControllerDidSelect(searchResult: String) {
+        // 특정 선택 항목에 대한 주식 세부 정보 표시
+    }
 }
