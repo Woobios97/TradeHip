@@ -8,10 +8,12 @@
 import UIKit
 
 class TopStoriesViewController: UIViewController {
+    
+    let tableView = UITableView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
 
 }

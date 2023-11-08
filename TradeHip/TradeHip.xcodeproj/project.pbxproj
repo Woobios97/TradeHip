@@ -22,9 +22,12 @@
 		A5CC5E4F2AF9414A00FD8D85 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC5E4E2AF9414A00FD8D85 /* APICaller.swift */; };
 		A5CC5E512AF9416100FD8D85 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC5E502AF9416100FD8D85 /* PersistenceManager.swift */; };
 		A5CC5E532AF9416F00FD8D85 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC5E522AF9416F00FD8D85 /* HapticsManager.swift */; };
+		B14BC5047A7870C930818706 /* Pods_TradeHip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A111B3C93303891F8B9D507B /* Pods_TradeHip.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A3B2CBB3C8E6D32668F6C3E /* Pods-TradeHip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeHip.release.xcconfig"; path = "Target Support Files/Pods-TradeHip/Pods-TradeHip.release.xcconfig"; sourceTree = "<group>"; };
+		A111B3C93303891F8B9D507B /* Pods_TradeHip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TradeHip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50B7C8A2AF94DC000225739 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A50B7C8C2AF9531600225739 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A50B7C8E2AF954CB00225739 /* BMJUA.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUA.otf; sourceTree = "<group>"; };
@@ -42,6 +45,7 @@
 		A5CC5E4E2AF9414A00FD8D85 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		A5CC5E502AF9416100FD8D85 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		A5CC5E522AF9416F00FD8D85 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
+		D7557B5BE1748730785E7AE4 /* Pods-TradeHip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeHip.debug.xcconfig"; path = "Target Support Files/Pods-TradeHip/Pods-TradeHip.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,17 +53,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B14BC5047A7870C930818706 /* Pods_TradeHip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3CE19EE5D780F547D8F0C989 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D7557B5BE1748730785E7AE4 /* Pods-TradeHip.debug.xcconfig */,
+				6A3B2CBB3C8E6D32668F6C3E /* Pods-TradeHip.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		489EC0232EC12BA932FF645A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A111B3C93303891F8B9D507B /* Pods_TradeHip.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A5CC5E222AF9392E00FD8D85 = {
 			isa = PBXGroup;
 			children = (
 				A5CC5E2D2AF9392E00FD8D85 /* TradeHip */,
 				A5CC5E2C2AF9392E00FD8D85 /* Products */,
+				3CE19EE5D780F547D8F0C989 /* Pods */,
+				489EC0232EC12BA932FF645A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,9 +165,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5CC5E3F2AF9392F00FD8D85 /* Build configuration list for PBXNativeTarget "TradeHip" */;
 			buildPhases = (
+				FCD47D2240CC47D32CA676E5 /* [CP] Check Pods Manifest.lock */,
 				A5CC5E272AF9392E00FD8D85 /* Sources */,
 				A5CC5E282AF9392E00FD8D85 /* Frameworks */,
 				A5CC5E292AF9392E00FD8D85 /* Resources */,
+				5F03522A79124599726A6E35 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -199,6 +225,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5F03522A79124599726A6E35 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TradeHip/Pods-TradeHip-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TradeHip/Pods-TradeHip-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TradeHip/Pods-TradeHip-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FCD47D2240CC47D32CA676E5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TradeHip-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A5CC5E272AF9392E00FD8D85 /* Sources */ = {
@@ -271,7 +339,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -334,7 +402,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -355,6 +423,7 @@
 		};
 		A5CC5E402AF9392F00FD8D85 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7557B5BE1748730785E7AE4 /* Pods-TradeHip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -386,6 +455,7 @@
 		};
 		A5CC5E412AF9392F00FD8D85 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A3B2CBB3C8E6D32668F6C3E /* Pods-TradeHip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
