@@ -78,7 +78,12 @@ extension WatchListViewController: UISearchResultsUpdating {
 
 extension WatchListViewController: SearchResultsViewControllerDelegate {
     func searchResultsViewControllerDidSelect(searchResult: SearchResult) {
+        navigationItem.searchController?.searchBar.resignFirstResponder()
         // 특정 선택 항목에 대한 주식 세부 정보 표시
         print(#fileID, #function, #line, "this is - 눌렸다 \(searchResult.displaySymbol)")
+        let vc = StockDetailsViewController()
+        let navVC = UINavigationController(rootViewController: vc)
+        vc.title = searchResult.description
+        present(navVC, animated: true)
     }
 }
