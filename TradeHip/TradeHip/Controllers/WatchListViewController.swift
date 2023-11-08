@@ -9,6 +9,8 @@ import UIKit
 
 class WatchListViewController: UIViewController {
     
+    private var searchTimer: Timer?
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +27,7 @@ class WatchListViewController: UIViewController {
         label.text = "주식"
         label.font = UIFont(name: "BMJUAOTF", size: 40)
         label.textColor = .systemOrange
-
+        
         navigationItem.titleView = titleView
         titleView.addSubview(label)
     }
@@ -37,7 +39,7 @@ class WatchListViewController: UIViewController {
         searchVC.searchResultsUpdater = self
         navigationItem.searchController = searchVC
     }
-
+    
 }
 
 extension WatchListViewController: UISearchResultsUpdating {
@@ -48,19 +50,35 @@ extension WatchListViewController: UISearchResultsUpdating {
             return
         }
         
+        // Reset timer
+        searchTimer?.invalidate()
+        
+        // 새 타이머 시작
         // 사용자가 입력을 멈출 때 검색 횟수를 줄이기 위해 최적화
-        
-        // 검색을 위한 API call
-        
-        // 업데이트 resultsController
-        resultVC.update(with: ["GOOG"])
-        print(#fileID, #function, #line, "this is - \(query)")
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { _ in
+            // 검색을 위한 API call
+            APICaller.shared.search(query: query) { result in
+                switch result {
+                case .success(let response):
+                    DispatchQueue.main.async {
+                        resultVC.update(with: response.result)
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        resultVC.update(with: [])
+                    }
+                    print(#fileID, #function, #line, "this is - \(error)")
+                }
+            }
+        })
+
     }
-        
+    
 }
 
 extension WatchListViewController: SearchResultsViewControllerDelegate {
-    func searchResultsViewControllerDidSelect(searchResult: String) {
+    func searchResultsViewControllerDidSelect(searchResult: SearchResult) {
         // 특정 선택 항목에 대한 주식 세부 정보 표시
+        print(#fileID, #function, #line, "this is - 눌렸다 \(searchResult.displaySymbol)")
     }
 }
