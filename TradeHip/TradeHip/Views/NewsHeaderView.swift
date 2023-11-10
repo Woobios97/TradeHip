@@ -18,7 +18,7 @@ class NewsHeaderView: UITableViewHeaderFooterView {
     
     weak var delegate: NewsHeaderViewDelegate?
     
-    struct ViewModal {
+    struct ViewModel {
         let title: String
         let shouldShowAddButton: Bool
     }
@@ -70,7 +70,7 @@ class NewsHeaderView: UITableViewHeaderFooterView {
         label.text = nil
     }
     
-    public func configure(with viewModel: ViewModal) {
+    public func configure(with viewModel: ViewModel) {
         label.text = viewModel.title
         button.isHidden = !viewModel.shouldShowAddButton
     }
