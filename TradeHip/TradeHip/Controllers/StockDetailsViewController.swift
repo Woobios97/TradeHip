@@ -76,10 +76,33 @@ class StockDetailsViewController: UIViewController {
     }
     
     private func fetchFinancialData() {
+        let group = DispatchGroup()
+        
         // 필요한 경우 캔들스틱을 가져옵니다.
+        if candleStickData.isEmpty {
+            group.enter()
+        }
         
         // 재무 지표를 가져옵니다.
-        renderChart()
+        group.enter()
+        APICaller.shared.financialMetrics(for: symbol) { [weak self] result in
+            defer {
+                group.leave()
+            }
+            
+            switch result {
+            case .success(let response):
+                let metrics = response.metric
+                print(#fileID, #function, #line, "this is - \(metrics)")
+            case .failure(let error):
+                print(#fileID, #function, #line, "this is - \(error)")
+            }
+        }
+        
+        group.notify(queue: .main) { [weak self] in
+            self?.renderChart()
+        }
+        
     }
     
     private func fetchNews() {
@@ -97,7 +120,11 @@ class StockDetailsViewController: UIViewController {
     }
     
     private func renderChart() {
-        
+        // Chart VM | FinancailMetricViewModel
+        let headerView = StockDetailHeaderView(frame: CGRect(x: 0, y: 0, width: view.width, height: (view.width * 0.7) + 100))
+        headerView.backgroundColor = .link
+        // Configure
+        tableView.tableHeaderView = headerView
     }
     
 }
