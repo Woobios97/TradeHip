@@ -25,8 +25,9 @@ class WatchListViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(WatchListTableViewCell.self, forCellReuseIdentifier: WatchListTableViewCell.identifier)
         return tableView
-        
     }()
+    
+    private var observer: NSObjectProtocol?
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -37,6 +38,7 @@ class WatchListViewController: UIViewController {
         fetchWatchlistData()
         setUpFloatingPanel()
         setUpTitleView()
+        setUpObserver()
     }
     
     override func viewDidLayoutSubviews() {
@@ -46,10 +48,19 @@ class WatchListViewController: UIViewController {
     
     // MARK: - Private
     
+    private func setUpObserver() {
+        observer = NotificationCenter.default.addObserver(forName: .didAddToWatchList, object: nil, queue: .main) { [weak self] _ in
+            self?.viewModels.removeAll()
+            self?.fetchWatchlistData()
+        }
+    }
+    
     private func fetchWatchlistData() {
         let symbols = PersistenceManager.shared.watchlist
+        
         let group = DispatchGroup()
-        for symbol in symbols {
+        
+        for symbol in symbols where watchlistMap[symbol] == nil {
             group.enter()
             
             APICaller.shared.marketData(for: symbol) { [weak self] result in
