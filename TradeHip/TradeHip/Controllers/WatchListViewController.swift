@@ -9,21 +9,50 @@ import UIKit
 import FloatingPanel
 
 class WatchListViewController: UIViewController {
-    
     private var searchTimer: Timer?
     
     private var panel: FloatingPanelController?
+    
+    /// Model
+    private var watchlistMap: [String: [String]] = [:]
+    
+    /// ViewModels
+    private var ViewModels: [String] = []
+    
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        
+        return tableView
+        
+    }()
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setUpSeachController()
+        setUpTableView()
+        setUpWatchlistData()
         setUpFloatingPanel()
         setUpTitleView()
     }
     
     // MARK: - Private
+    
+    private func setUpWatchlistData() {
+        let symbols = PersistenceManager.shared.watchlist
+        for symbol in symbols {
+            // 심볼별로 시장 데이터 가져오기
+            watchlistMap[symbol] = ["some string"]
+        }
+        tableView.reloadData()
+    }
+    
+    private func setUpTableView() {
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
     
     private func setUpFloatingPanel() {
         let vc = NewsViewController(type: .company(symbol: "SNAP"))
@@ -34,7 +63,7 @@ class WatchListViewController: UIViewController {
         panel.delegate = self
         panel.track(scrollView: vc.tableView)
     }
-
+    
     private func setUpTitleView() {
         let titleView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: navigationController?.navigationBar.height ?? 100))
         let label = UILabel(frame: CGRect(x: 10, y: 0, width: titleView.width - 20, height: titleView.height))
@@ -85,7 +114,7 @@ extension WatchListViewController: UISearchResultsUpdating {
                 }
             }
         })
-
+        
     }
     
 }
@@ -106,4 +135,21 @@ extension WatchListViewController: FloatingPanelControllerDelegate {
     func floatingPanelDidChangeState(_ fpc: FloatingPanelController) {
         navigationItem.titleView?.isHidden = fpc.state == .full
     }
+}
+
+extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return watchlistMap.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        //
+    }
+    
+    
 }
