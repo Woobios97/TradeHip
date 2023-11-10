@@ -97,7 +97,8 @@ class WatchListViewController: UIViewController {
                     chartViewModel: .init(
                         data: candleSticks.reversed().map{ $0.close },
                         showLegned: false,
-                        showAxis: false
+                        showAxis: false,
+                        fillColor: changePercentage < 0 ? .systemRed : .systemGreen
                     )
                 )
             )
@@ -133,7 +134,7 @@ class WatchListViewController: UIViewController {
     }
     
     private func setUpFloatingPanel() {
-        let vc = NewsViewController(type: .company(symbol: "SNAP"))
+        let vc = NewsViewController(type: .topStories)
         let panel = FloatingPanelController(delegate: self)
         panel.surfaceView.backgroundColor = .secondarySystemBackground
         panel.set(contentViewController: vc)

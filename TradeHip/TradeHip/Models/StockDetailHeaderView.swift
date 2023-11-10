@@ -23,7 +23,7 @@ class StockDetailHeaderView: UIView, UICollectionViewDelegate, UICollectionViewD
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 2
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .secondarySystemBackground
         collectionView.register(MetricCollectionViewCell.self, forCellWithReuseIdentifier: MetricCollectionViewCell.identifier)
         return collectionView
     }()
@@ -48,6 +48,7 @@ class StockDetailHeaderView: UIView, UICollectionViewDelegate, UICollectionViewD
     
     func configure(charViewModel: StockChartView.ViewModel, metricViewModels: [MetricCollectionViewCell.ViewModel]) {
         // Update Chart
+        chartView.configure(with: charViewModel)
         self.metricViewModels = metricViewModels
         collectionView.reloadData()
     }

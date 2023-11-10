@@ -17,6 +17,7 @@ class StockDetailsViewController: UIViewController {
     
     private let tableView: UITableView = {
         let table = UITableView()
+        table.backgroundColor = .secondarySystemBackground
         table.register(NewsHeaderView.self, forHeaderFooterViewReuseIdentifier: NewsHeaderView.identifier)
         table.register(NewsStoryTableViewCell.self, forCellReuseIdentifier: NewsStoryTableViewCell.identifier)
         return table
@@ -83,6 +84,17 @@ class StockDetailsViewController: UIViewController {
         // 필요한 경우 캔들스틱을 가져옵니다.
         if candleStickData.isEmpty {
             group.enter()
+            APICaller.shared.marketData(for: symbol) { [weak self] result in
+                defer {
+                    group.leave()
+                }
+                switch result {
+                case .success(let response):
+                    self?.candleStickData = response.candleStick
+                case .failure(let error):
+                    print(#fileID, #function, #line, "this is - \(error)")
+                }
+            }
         }
         
         // 재무 지표를 가져옵니다.
@@ -133,9 +145,26 @@ class StockDetailsViewController: UIViewController {
             viewModels.append(.init(name: "일중평균거래량", value: "\(metrics.TenDayAverageTradingVolume)"))
         }
         // Configure
-        headerView.configure(charViewModel: .init(data: [], showLegned: false, showAxis: false),
+        let change = getChangePercentage(symbol: symbol, data: candleStickData)
+        headerView.configure(charViewModel: .init(data: candleStickData.reversed().map{ $0.close },
+                                                  showLegned: true,
+                                                  showAxis: true,
+                                                  fillColor: change < 0 ? .systemRed : .systemGreen),
                              metricViewModels: viewModels)
         tableView.tableHeaderView = headerView
+    }
+    
+    private func getChangePercentage(symbol: String, data: [CandleStick]) -> Double {
+        let latestdate = data[0].date
+        guard let latestClose = data.first?.close,
+              let priorClose = data.first(where: {
+                  !Calendar.current.isDate($0.date, inSameDayAs: latestdate)
+              })?.close else {
+            return 0
+        }
+      
+        let diff = 1 - (priorClose/latestClose)
+        return diff
     }
     
 }
