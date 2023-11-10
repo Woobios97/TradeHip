@@ -30,15 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func debug() {
-        APICaller.shared.news(for: .company(symbol: "MSFT")) { result in
-            switch result {
-            case .success(let news):
-                print(#fileID, #function, #line, "this is - \(news.count)")
-            case .failure(let error):
-                print(error)
-            }
-        }
+
     }
 
 }
+
 
