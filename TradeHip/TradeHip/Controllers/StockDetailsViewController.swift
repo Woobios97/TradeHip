@@ -24,6 +24,8 @@ class StockDetailsViewController: UIViewController {
     
     private var stories: [NewsStory] = []
     
+    private var metrics: Metrics?
+    
     // MARK: - init
     // Symbol, 회사 이름, 우리가 보유할 수 있는 모든 차트 데이터
     init(symbol: String, companyName: String, candleStickData: [CandleStick] = []) {
@@ -93,7 +95,7 @@ class StockDetailsViewController: UIViewController {
             switch result {
             case .success(let response):
                 let metrics = response.metric
-                print(#fileID, #function, #line, "this is - \(metrics)")
+                self?.metrics = metrics
             case .failure(let error):
                 print(#fileID, #function, #line, "this is - \(error)")
             }
@@ -122,8 +124,17 @@ class StockDetailsViewController: UIViewController {
     private func renderChart() {
         // Chart VM | FinancailMetricViewModel
         let headerView = StockDetailHeaderView(frame: CGRect(x: 0, y: 0, width: view.width, height: (view.width * 0.7) + 100))
-        headerView.backgroundColor = .link
+        var viewModels = [MetricCollectionViewCell.ViewModel]()
+        if let metrics = metrics {
+            viewModels.append(.init(name: "연간주최고", value: "\(metrics.AnnualWeekHigh)"))
+            viewModels.append(.init(name: "연간주최저", value: "\(metrics.AnnualWeekLow)"))
+            viewModels.append(.init(name: "연간일일수익률", value: "\(metrics.AnnualWeekPriceReturnDaily)"))
+            viewModels.append(.init(name: "시장민감도", value: "\(metrics.beta)"))
+            viewModels.append(.init(name: "일중평균거래량", value: "\(metrics.TenDayAverageTradingVolume)"))
+        }
         // Configure
+        headerView.configure(charViewModel: .init(data: [], showLegned: false, showAxis: false),
+                             metricViewModels: viewModels)
         tableView.tableHeaderView = headerView
     }
     
