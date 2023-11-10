@@ -223,6 +223,29 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         // 선택을 위한 세부정보 열기
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            // persistence 업데이트 (데이터변경)
+            PersistenceManager.shared.removeFromWatchlist(symbol: viewModels[indexPath.row].symbol)
+            
+            // viewModel 업데이트 (데이터변경)
+            viewModels.remove(at: indexPath.row)
+                        
+            // 행 삭제 (UI업데이트)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
 }
 
 extension WatchListViewController: WatchListTableViewCellCellDelegate {
