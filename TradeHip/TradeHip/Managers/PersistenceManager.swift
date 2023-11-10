@@ -54,7 +54,7 @@ final class PersistenceManager {
             "GOOG": "Alphabet",
             "AMZN": "Amazon.com. Inc",
             "META": "Meta Platforms, Inc.",
-            "NVDA": "Nvidia Inch.",
+            "NVDA": "Nvidia Inc.",
             "NKE": "Nike",
             "PINS": "Pinterest Inc.",
             "TSLA": "Tesla, Inc.",
