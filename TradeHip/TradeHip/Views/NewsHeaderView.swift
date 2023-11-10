@@ -29,7 +29,7 @@ class NewsHeaderView: UITableViewHeaderFooterView {
         return label
     }()
     
-    private let button: UIButton = {
+    let button: UIButton = {
         let button = UIButton()
         button.setTitle("+ 관심 목록", for: .normal)
         button.backgroundColor = .systemOrange
