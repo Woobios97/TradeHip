@@ -204,6 +204,7 @@ extension StockDetailsViewController: UITableViewDelegate, UITableViewDataSource
         guard let url = URL(string: stories[indexPath.row].url) else {
             return
         }
+        HapticsManager.shared.vibrateForSelection()
         let vc = SFSafariViewController(url: url)
         present(vc, animated: true)
     }
@@ -212,6 +213,7 @@ extension StockDetailsViewController: UITableViewDelegate, UITableViewDataSource
 // MARK: - NewsHeaderViewDelegate
 extension StockDetailsViewController: NewsHeaderViewDelegate {
     func newsHeaderViewDidTapAddButton(_ headerView: NewsHeaderView) {
+        HapticsManager.shared.vibrate(for: .success)
         // Add to watchlist
         headerView.button.isHidden = true
         PersistenceManager.shared.addToWatchlist(symbol: symbol, companyName: companyName)

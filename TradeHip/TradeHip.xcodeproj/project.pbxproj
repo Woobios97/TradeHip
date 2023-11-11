@@ -20,6 +20,7 @@
 		A5C4F3392AFE962E005573A5 /* FinancialMetricsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C4F3382AFE962E005573A5 /* FinancialMetricsResponse.swift */; };
 		A5C4F33B2AFE985A005573A5 /* StockDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C4F33A2AFE985A005573A5 /* StockDetailHeaderView.swift */; };
 		A5C4F33D2AFEA443005573A5 /* MetricCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C4F33C2AFEA443005573A5 /* MetricCollectionViewCell.swift */; };
+		A5C4F3452AFF65C3005573A5 /* TradeHipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C4F3442AFF65C3005573A5 /* TradeHipTests.swift */; };
 		A5CC5E2F2AF9392E00FD8D85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC5E2E2AF9392E00FD8D85 /* AppDelegate.swift */; };
 		A5CC5E312AF9392E00FD8D85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC5E302AF9392E00FD8D85 /* SceneDelegate.swift */; };
 		A5CC5E332AF9392E00FD8D85 /* WatchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC5E322AF9392E00FD8D85 /* WatchListViewController.swift */; };
@@ -33,6 +34,16 @@
 		A5CC5E532AF9416F00FD8D85 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC5E522AF9416F00FD8D85 /* HapticsManager.swift */; };
 		B14BC5047A7870C930818706 /* Pods_TradeHip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A111B3C93303891F8B9D507B /* Pods_TradeHip.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A5C4F3462AFF65C3005573A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5CC5E232AF9392E00FD8D85 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5CC5E2A2AF9392E00FD8D85;
+			remoteInfo = TradeHip;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		6A3B2CBB3C8E6D32668F6C3E /* Pods-TradeHip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeHip.release.xcconfig"; path = "Target Support Files/Pods-TradeHip/Pods-TradeHip.release.xcconfig"; sourceTree = "<group>"; };
@@ -51,6 +62,8 @@
 		A5C4F3382AFE962E005573A5 /* FinancialMetricsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialMetricsResponse.swift; sourceTree = "<group>"; };
 		A5C4F33A2AFE985A005573A5 /* StockDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StockDetailHeaderView.swift; path = TradeHip/Models/StockDetailHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		A5C4F33C2AFEA443005573A5 /* MetricCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricCollectionViewCell.swift; sourceTree = "<group>"; };
+		A5C4F3422AFF65C3005573A5 /* TradeHipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TradeHipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5C4F3442AFF65C3005573A5 /* TradeHipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeHipTests.swift; sourceTree = "<group>"; };
 		A5CC5E2B2AF9392E00FD8D85 /* TradeHip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeHip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5CC5E2E2AF9392E00FD8D85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5CC5E302AF9392E00FD8D85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +80,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A5C4F33F2AFF65C3005573A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5CC5E282AF9392E00FD8D85 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -95,10 +115,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A5C4F3432AFF65C3005573A5 /* TradeHipTests */ = {
+			isa = PBXGroup;
+			children = (
+				A5C4F3442AFF65C3005573A5 /* TradeHipTests.swift */,
+			);
+			path = TradeHipTests;
+			sourceTree = "<group>";
+		};
 		A5CC5E222AF9392E00FD8D85 = {
 			isa = PBXGroup;
 			children = (
 				A5CC5E2D2AF9392E00FD8D85 /* TradeHip */,
+				A5C4F3432AFF65C3005573A5 /* TradeHipTests */,
 				A5CC5E2C2AF9392E00FD8D85 /* Products */,
 				3CE19EE5D780F547D8F0C989 /* Pods */,
 				489EC0232EC12BA932FF645A /* Frameworks */,
@@ -109,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				A5CC5E2B2AF9392E00FD8D85 /* TradeHip.app */,
+				A5C4F3422AFF65C3005573A5 /* TradeHipTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -188,6 +218,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A5C4F3412AFF65C3005573A5 /* TradeHipTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5C4F34A2AFF65C3005573A5 /* Build configuration list for PBXNativeTarget "TradeHipTests" */;
+			buildPhases = (
+				A5C4F33E2AFF65C3005573A5 /* Sources */,
+				A5C4F33F2AFF65C3005573A5 /* Frameworks */,
+				A5C4F3402AFF65C3005573A5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5C4F3472AFF65C3005573A5 /* PBXTargetDependency */,
+			);
+			name = TradeHipTests;
+			productName = TradeHipTests;
+			productReference = A5C4F3422AFF65C3005573A5 /* TradeHipTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A5CC5E2A2AF9392E00FD8D85 /* TradeHip */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5CC5E3F2AF9392F00FD8D85 /* Build configuration list for PBXNativeTarget "TradeHip" */;
@@ -217,6 +265,10 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					A5C4F3412AFF65C3005573A5 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = A5CC5E2A2AF9392E00FD8D85;
+					};
 					A5CC5E2A2AF9392E00FD8D85 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -236,11 +288,19 @@
 			projectRoot = "";
 			targets = (
 				A5CC5E2A2AF9392E00FD8D85 /* TradeHip */,
+				A5C4F3412AFF65C3005573A5 /* TradeHipTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A5C4F3402AFF65C3005573A5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5CC5E292AF9392E00FD8D85 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -296,6 +356,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A5C4F33E2AFF65C3005573A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5C4F3452AFF65C3005573A5 /* TradeHipTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5CC5E272AF9392E00FD8D85 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -326,6 +394,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A5C4F3472AFF65C3005573A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5CC5E2A2AF9392E00FD8D85 /* TradeHip */;
+			targetProxy = A5C4F3462AFF65C3005573A5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		A5CC5E392AF9392F00FD8D85 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -338,6 +414,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A5C4F3482AFF65C3005573A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FQRWL84Z3B;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WooBi.TradeHipTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TradeHip.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TradeHip";
+			};
+			name = Debug;
+		};
+		A5C4F3492AFF65C3005573A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FQRWL84Z3B;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WooBi.TradeHipTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TradeHip.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TradeHip";
+			};
+			name = Release;
+		};
 		A5CC5E3D2AF9392F00FD8D85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -524,6 +638,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A5C4F34A2AFF65C3005573A5 /* Build configuration list for PBXNativeTarget "TradeHipTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5C4F3482AFF65C3005573A5 /* Debug */,
+				A5C4F3492AFF65C3005573A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A5CC5E262AF9392E00FD8D85 /* Build configuration list for PBXProject "TradeHip" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

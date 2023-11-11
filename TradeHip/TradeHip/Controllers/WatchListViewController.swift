@@ -67,7 +67,7 @@ final class WatchListViewController: UIViewController {
     /// 관심목록 모델 가져오기
     private func fetchWatchlistData() {
         let symbols = PersistenceManager.shared.watchlist
-        
+        createPlaceholderViewModels()
         let group = DispatchGroup()
         
         for symbol in symbols where watchlistMap[symbol] == nil {
@@ -92,6 +92,25 @@ final class WatchListViewController: UIViewController {
         }
     }
     
+    private func createPlaceholderViewModels() {
+        let symbols = PersistenceManager.shared.watchlist
+        symbols.forEach { item in
+            viewModels.append(
+                .init(symbol: item, 
+                      companyName: UserDefaults.standard.string(forKey: item) ?? "Company",
+                      price: "0.00",
+                      changeColor: .systemGreen,
+                      changePercnetage: "0.00",
+                      chartViewModel:
+                        .init(data: [], 
+                              showLegned: false,
+                              showAxis: false,
+                              fillColor: .clear)))
+        }
+        self.viewModels = viewModels.sorted(by: { $0.symbol > $1.symbol })
+        tableView.reloadData()
+    }
+    
     /// 모델에서 뷰 모델을 생성
     private func createViewModels() {
         var viewModels = [WatchListTableViewCell.ViewModel]()
@@ -113,9 +132,8 @@ final class WatchListViewController: UIViewController {
                     )
                 )
             )
-            
-            self.viewModels = viewModels
         }
+        self.viewModels = viewModels.sorted(by: { $0.symbol > $1.symbol })
     }
     
     /// 최신 종가를 가져오기
@@ -204,8 +222,7 @@ extension WatchListViewController: UISearchResultsUpdating {
 extension WatchListViewController: SearchResultsViewControllerDelegate {
     func searchResultsViewControllerDidSelect(searchResult: SearchResult) {
         navigationItem.searchController?.searchBar.resignFirstResponder()
-        // 특정 선택 항목에 대한 주식 세부 정보 표시
-        print(#fileID, #function, #line, "this is - 눌렸다 \(searchResult.displaySymbol)")
+        HapticsManager.shared.vibrateForSelection()
         let vc = StockDetailsViewController(symbol: searchResult.displaySymbol, companyName: searchResult.description)
         let navVC = UINavigationController(rootViewController: vc)
         vc.title = searchResult.description
@@ -253,7 +270,7 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
             
             // viewModel 업데이트 (데이터변경)
             viewModels.remove(at: indexPath.row)
-                        
+            
             // 행 삭제 (UI업데이트)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
@@ -262,7 +279,7 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // 선택을 위한 세부정보 열기
+        HapticsManager.shared.vibrateForSelection()
         let viewModel = viewModels[indexPath.row]
         let vc = StockDetailsViewController(
             symbol: viewModel.symbol,

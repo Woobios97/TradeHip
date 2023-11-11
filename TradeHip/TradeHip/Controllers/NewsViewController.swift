@@ -128,6 +128,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        HapticsManager.shared.vibrateForSelection()
         let story = stories[indexPath.row]
         guard let url = URL(string: story.url) else {
             presentFaildToOpenAlert()
@@ -137,6 +138,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     /// 스토리를 열 때 발생한 오류를 표시하는 알림 표시
     private func presentFaildToOpenAlert() {
+        HapticsManager.shared.vibrate(for: .error)
         let alert = UIAlertController(title: "연결에 실패했습니다.", message: "기사 연결에 실패했습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "취소", style: .cancel))
         present(alert, animated: true)
