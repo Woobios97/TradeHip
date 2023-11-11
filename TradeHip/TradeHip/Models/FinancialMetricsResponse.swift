@@ -7,10 +7,12 @@
 
 import Foundation
 
+/// API의 측정항목 응답
 struct FinancialMetricsResponse: Codable {
     let metric: Metrics
 }
 
+/// 재무 지표
 struct Metrics: Codable {
     let TenDayAverageTradingVolume: Float
     let AnnualWeekHigh: Double
@@ -28,4 +30,3 @@ struct Metrics: Codable {
         case beta = "beta"
     }
 }
-

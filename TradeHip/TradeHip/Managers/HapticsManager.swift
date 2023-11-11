@@ -15,9 +15,19 @@ final class HapticsManager {
     
     // MARK: - Public
     
+    /// <#Description#>
     public func vibrateForSelection() {
         // 선택 탭 상호작용을 위해 가볍게 진동
+        let generator = UISelectionFeedbackGenerator()
+        generator.prepare()
+        generator.selectionChanged()
     }
     
-    // 타입에 따른 진동
+    /// 주어진 유형의 상호작용에 대해 햅틱을 재생합니다.
+    /// - Parameter type: <#type description#>
+    public func vibrate(for type: UINotificationFeedbackGenerator.FeedbackType) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.prepare()
+        generator.notificationOccurred(type)
+    }
 }

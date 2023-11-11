@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 시장 데이터 반응
 struct MarketDataResponse: Codable {
     let open: [Double]
     let close: [Double]
@@ -24,6 +25,7 @@ struct MarketDataResponse: Codable {
         case timestamps = "t"
     }
     
+    /// 시장 데이터를 캔들스틱 모델 배열로 변환
     var candleStick: [CandleStick] {
         var result = [CandleStick]()
         for index in 0..<open.count {
@@ -42,6 +44,7 @@ struct MarketDataResponse: Codable {
     }
 }
 
+/// 하루 동안의 데이터를 나타내는 모델
 struct CandleStick {
     let date: Date
     let high: Double
