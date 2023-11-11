@@ -7,9 +7,9 @@
 
 import UIKit
 
-/// Tableview cell for search result
+/// 검색 결과에 대한 Tableview 셀
 final class SearchResultTableViewCell: UITableViewCell {
-    /// Identifier for cell
+    
     static let identifier = "SearchResultTableViewCell"
     
     // MARK: - Init
