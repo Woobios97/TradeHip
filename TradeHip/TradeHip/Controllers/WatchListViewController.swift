@@ -8,28 +8,36 @@
 import UIKit
 import FloatingPanel
 
-class WatchListViewController: UIViewController {
+/// 사용자 관심목록을 렌더링하는 VC
+final class WatchListViewController: UIViewController {
+    
+    /// 검색 최적화를 위한 타이머
     private var searchTimer: Timer?
     
+    /// Floating 뉴스패널
     private var panel: FloatingPanelController?
     
+    /// 변경 레이블 지오메트리를 추적할 너비
     static var maxChangeWidth: CGFloat = 0
     
-    /// Model
+    /// 모델
     private var watchlistMap: [String: [CandleStick]] = [:]
     
-    /// ViewModels
+    /// 뷰모델
     private var viewModels: [WatchListTableViewCell.ViewModel] = []
     
+    /// 관심목록을 렌더링할 메인뷰
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(WatchListTableViewCell.self, forCellReuseIdentifier: WatchListTableViewCell.identifier)
         return tableView
     }()
     
+    /// 감시 목록 업데이트를 위한 관찰자
     private var observer: NSObjectProtocol?
     
     // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -48,6 +56,7 @@ class WatchListViewController: UIViewController {
     
     // MARK: - Private
     
+    /// 관심목록 업데이트를 위한 관찰자 설정
     private func setUpObserver() {
         observer = NotificationCenter.default.addObserver(forName: .didAddToWatchList, object: nil, queue: .main) { [weak self] _ in
             self?.viewModels.removeAll()
@@ -55,9 +64,10 @@ class WatchListViewController: UIViewController {
         }
     }
     
+    /// 관심목록 모델 가져오기
     private func fetchWatchlistData() {
         let symbols = PersistenceManager.shared.watchlist
-        
+        createPlaceholderViewModels()
         let group = DispatchGroup()
         
         for symbol in symbols where watchlistMap[symbol] == nil {
@@ -82,11 +92,31 @@ class WatchListViewController: UIViewController {
         }
     }
     
+    private func createPlaceholderViewModels() {
+        let symbols = PersistenceManager.shared.watchlist
+        symbols.forEach { item in
+            viewModels.append(
+                .init(symbol: item, 
+                      companyName: UserDefaults.standard.string(forKey: item) ?? "Company",
+                      price: "0.00",
+                      changeColor: .systemGreen,
+                      changePercnetage: "0.00",
+                      chartViewModel:
+                        .init(data: [], 
+                              showLegned: false,
+                              showAxis: false,
+                              fillColor: .clear)))
+        }
+        self.viewModels = viewModels.sorted(by: { $0.symbol > $1.symbol })
+        tableView.reloadData()
+    }
+    
+    /// 모델에서 뷰 모델을 생성
     private func createViewModels() {
         var viewModels = [WatchListTableViewCell.ViewModel]()
         
         for (symbol, candleSticks) in watchlistMap {
-            let changePercentage = getChangePercentage(symbol: symbol, data: candleSticks)
+            let changePercentage = candleSticks.getPercentage()
             viewModels.append(
                 .init(
                     symbol: symbol,
@@ -97,28 +127,18 @@ class WatchListViewController: UIViewController {
                     chartViewModel: .init(
                         data: candleSticks.reversed().map{ $0.close },
                         showLegned: false,
-                        showAxis: false
+                        showAxis: false,
+                        fillColor: changePercentage < 0 ? .systemRed : .systemGreen
                     )
                 )
             )
-            
-            self.viewModels = viewModels
         }
+        self.viewModels = viewModels.sorted(by: { $0.symbol > $1.symbol })
     }
     
-    private func getChangePercentage(symbol: String, data: [CandleStick]) -> Double {
-        let latestdate = data[0].date
-        guard let latestClose = data.first?.close,
-              let priorClose = data.first(where: {
-                  !Calendar.current.isDate($0.date, inSameDayAs: latestdate)
-              })?.close else {
-            return 0
-        }
-      
-        let diff = 1 - (priorClose/latestClose)
-        return diff
-    }
-    
+    /// 최신 종가를 가져오기
+    /// - Parameter data: Collection of data
+    /// - Returns: String
     private func getLatestClosingPrice(from data: [CandleStick]) -> String {
         guard let closingPrice = data.first?.close else {
             return ""
@@ -132,8 +152,9 @@ class WatchListViewController: UIViewController {
         tableView.dataSource = self
     }
     
+    /// 뉴스패널 설정
     private func setUpFloatingPanel() {
-        let vc = NewsViewController(type: .company(symbol: "SNAP"))
+        let vc = NewsViewController(type: .topStories)
         let panel = FloatingPanelController(delegate: self)
         panel.surfaceView.backgroundColor = .secondarySystemBackground
         panel.set(contentViewController: vc)
@@ -142,6 +163,7 @@ class WatchListViewController: UIViewController {
         panel.track(scrollView: vc.tableView)
     }
     
+    /// 커스텀타이틀뷰 설정
     private func setUpTitleView() {
         let titleView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: navigationController?.navigationBar.height ?? 100))
         let label = UILabel(frame: CGRect(x: 10, y: 0, width: titleView.width - 20, height: titleView.height))
@@ -153,6 +175,7 @@ class WatchListViewController: UIViewController {
         titleView.addSubview(label)
     }
     
+    ///검색 및 결과 컨트롤러 설정
     private func setUpSeachController() {
         let resultVC = SearchResultsViewController()
         let searchVC = UISearchController(searchResultsController: resultVC)
@@ -161,8 +184,10 @@ class WatchListViewController: UIViewController {
         navigationItem.searchController = searchVC
     }
 }
-
+// MARK: - UISearchResultsUpdating
 extension WatchListViewController: UISearchResultsUpdating {
+    /// 유저서칭 업데이트
+    /// - Parameter searchController: 검색 컨트롤러의 참조
     func updateSearchResults(for searchController: UISearchController) {
         guard let query = searchController.searchBar.text,
               let resultVC = searchController.searchResultsController as? SearchResultsViewController,
@@ -170,7 +195,7 @@ extension WatchListViewController: UISearchResultsUpdating {
             return
         }
         
-        // Reset timer
+        /// Reset timer
         searchTimer?.invalidate()
         
         // 새 타이머 시작
@@ -193,25 +218,24 @@ extension WatchListViewController: UISearchResultsUpdating {
         })
     }
 }
-
+// MARK: - SearchResultsViewControllerDelegate
 extension WatchListViewController: SearchResultsViewControllerDelegate {
     func searchResultsViewControllerDidSelect(searchResult: SearchResult) {
         navigationItem.searchController?.searchBar.resignFirstResponder()
-        // 특정 선택 항목에 대한 주식 세부 정보 표시
-        print(#fileID, #function, #line, "this is - 눌렸다 \(searchResult.displaySymbol)")
+        HapticsManager.shared.vibrateForSelection()
         let vc = StockDetailsViewController(symbol: searchResult.displaySymbol, companyName: searchResult.description)
         let navVC = UINavigationController(rootViewController: vc)
         vc.title = searchResult.description
         present(navVC, animated: true)
     }
 }
-
+// MARK: - FloatingPanelControllerDelegate
 extension WatchListViewController: FloatingPanelControllerDelegate {
     func floatingPanelDidChangeState(_ fpc: FloatingPanelController) {
         navigationItem.titleView?.isHidden = fpc.state == .full
     }
 }
-
+// MARK: - TableView
 extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
@@ -246,7 +270,7 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
             
             // viewModel 업데이트 (데이터변경)
             viewModels.remove(at: indexPath.row)
-                        
+            
             // 행 삭제 (UI업데이트)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
@@ -255,7 +279,7 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // 선택을 위한 세부정보 열기
+        HapticsManager.shared.vibrateForSelection()
         let viewModel = viewModels[indexPath.row]
         let vc = StockDetailsViewController(
             symbol: viewModel.symbol,
@@ -266,7 +290,7 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
         present(navVC, animated: true)
     }
 }
-
+// MARK: - WatchListTableViewCellDelegate
 extension WatchListViewController: WatchListTableViewCellCellDelegate {
     func didUpdateMaxWidth() {
         // 최적화: 최대 너비를 변경하는 현재 행 이전의 행만 새로 고치기

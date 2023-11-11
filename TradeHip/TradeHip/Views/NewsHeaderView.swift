@@ -7,22 +7,27 @@
 
 import UIKit
 
+/// 헤더 이벤트를 알리는 위임
 protocol NewsHeaderViewDelegate: AnyObject {
+    /// 사용자가 탭한 헤더 버튼에 알림
+    /// - Parameter headerView: 헤더 뷰 참조
     func newsHeaderViewDidTapAddButton(_ headerView: NewsHeaderView)
 }
 
-class NewsHeaderView: UITableViewHeaderFooterView {
-    
+/// 뉴스의 TableView 헤더
+final class NewsHeaderView: UITableViewHeaderFooterView {
     static let identifier = "NewsHeaderView"
+    
     static let preferredHeight: CGFloat = 70
     
     weak var delegate: NewsHeaderViewDelegate?
     
+    /// 헤더뷰모델
     struct ViewModel {
         let title: String
         let shouldShowAddButton: Bool
     }
-    
+    // MARK: - Private
     private let label: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 32)
@@ -47,9 +52,8 @@ class NewsHeaderView: UITableViewHeaderFooterView {
         contentView.addSubviews(label, button)
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
-    
+    /// 핸들 버튼 탭
     @objc private func didTapButton() {
-        // call delegate
         delegate?.newsHeaderViewDidTapAddButton(self)
     }
     
@@ -70,6 +74,8 @@ class NewsHeaderView: UITableViewHeaderFooterView {
         label.text = nil
     }
     
+    /// Configure 뷰
+    /// - Parameter viewModel: 뷰모델
     public func configure(with viewModel: ViewModel) {
         label.text = viewModel.title
         button.isHidden = !viewModel.shouldShowAddButton

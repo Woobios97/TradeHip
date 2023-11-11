@@ -8,5 +8,6 @@ target 'TradeHip' do
   # Pods for TradeHip
   pod 'FloatingPanel'
   pod 'SDWebImage'
+  pod 'Charts'
 
 end

@@ -7,15 +7,20 @@
 
 import UIKit
 
+/// 검색결과 Delegate
 protocol SearchResultsViewControllerDelegate: AnyObject {
+    /// 셀선택 delegate
+    /// - Parameter searchResult: 선택 result
     func searchResultsViewControllerDidSelect(searchResult: SearchResult)
 }
 
-class SearchResultsViewController: UIViewController {
+/// 검색 결과를 표시하는 VC
+final class SearchResultsViewController: UIViewController {
     weak var delegate: SearchResultsViewControllerDelegate?
     
     private var results: [SearchResult] = []
 
+    /// 주요뷰
     private let tableView: UITableView = {
        let table = UITableView()
         table.register(SearchResultTableViewCell.self, forCellReuseIdentifier: SearchResultTableViewCell.identifier)
@@ -23,7 +28,7 @@ class SearchResultsViewController: UIViewController {
         return table
     }()
     
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -34,13 +39,17 @@ class SearchResultsViewController: UIViewController {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
-    
+    // MARK: - Private
     private func setUpTable() {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
     }
     
+    // MARK: - Public
+    
+    /// VC 결과 업데이트
+    /// - Parameter results: 새로운결과 collection
     public func update(with results: [SearchResult]) {
         self.results = results
         tableView.isHidden = results.isEmpty
@@ -48,6 +57,7 @@ class SearchResultsViewController: UIViewController {
     }
 
 }
+// MARK: - TableView
 
 extension SearchResultsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

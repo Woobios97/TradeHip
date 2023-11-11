@@ -8,12 +8,14 @@
 import UIKit
 import SDWebImage
 
+/// 뉴스 기사 테이블보기 셀
 class NewsStoryTableViewCell: UITableViewCell {
 
-   static let identifier = "NewsStoryTableViewCell"
+    static let identifier = "NewsStoryTableViewCell"
     
     static let preferredHeight: CGFloat = 140
     
+    /// Cell 뷰모델
     struct ViewModel {
         let source: String
         let headline: String
@@ -28,14 +30,14 @@ class NewsStoryTableViewCell: UITableViewCell {
         }
     }
     
-    // 출처
+    /// 출처
     private let sourceLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .medium)
         return label
     }()
     
-    // 헤드라인
+    /// 헤드라인
     private let headlineLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .regular)
@@ -43,7 +45,7 @@ class NewsStoryTableViewCell: UITableViewCell {
         return label
     }()
     
-    // 날짜
+    /// 날짜
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .secondaryLabel
@@ -51,9 +53,9 @@ class NewsStoryTableViewCell: UITableViewCell {
         return label
     }()
     
-    // 이미지
+    /// 이미지
     private let storyImageView: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.backgroundColor = .tertiarySystemBackground
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
@@ -61,8 +63,8 @@ class NewsStoryTableViewCell: UITableViewCell {
         imageView.layer.masksToBounds = true
         return imageView
     }()
-   
     
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .secondarySystemBackground
@@ -105,12 +107,12 @@ class NewsStoryTableViewCell: UITableViewCell {
         
     }
     
+    /// Configure 뷰
+    /// - Parameter viewModel: 뷰모델
     public func configure(with viewModel: ViewModel) {
         headlineLabel.text = viewModel.headline
         sourceLabel.text = viewModel.source
         dateLabel.text = viewModel.dateString
         storyImageView.sd_setImage(with: viewModel.imageUrl, completed: nil)
-        // 수동으로 이미지 설정
-        //storyImageView.setImage(with: viewModel.imageUrl)
     }
 }
