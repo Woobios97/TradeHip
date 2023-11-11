@@ -8,13 +8,18 @@
 import SafariServices
 import UIKit
 
-class StockDetailsViewController: UIViewController {
+/// 주식 세부정보를 표시하는 VC
+final class StockDetailsViewController: UIViewController {
     // MARK: - Properties
     
+    /// 주식 symbol
     private let symbol: String
+    /// 회사 name
     private let companyName: String
+    /// Collection of data
     private var candleStickData: [CandleStick]
     
+    /// 주요뷰
     private let tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = .secondarySystemBackground
@@ -23,8 +28,10 @@ class StockDetailsViewController: UIViewController {
         return table
     }()
     
+    /// 뉴스기사 collection
     private var stories: [NewsStory] = []
     
+    ///회사 지표
     private var metrics: Metrics?
     
     // MARK: - init
@@ -49,9 +56,8 @@ class StockDetailsViewController: UIViewController {
         setUpCloseButton()
         // 뷰표시
         setUpTable()
-        // 재무 데이터 // 차트/그래프 표시
+        // 재무 데이터 // 차트|그래프 표시
         fetchFinancialData()
-       
         // 뉴스표시
         fetchNews()
     }
@@ -62,15 +68,17 @@ class StockDetailsViewController: UIViewController {
     }
     
     // MARK: - Private
-    
+    /// 닫기 버튼 설정
     private func setUpCloseButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didTapClose))
     }
     
+    /// 닫기 버튼 탭 처리
     @objc private func didTapClose() {
         dismiss(animated: true, completion: nil)
     }
     
+    /// Sets up table
     private func setUpTable() {
         view.addSubview(tableView)
         tableView.delegate = self
@@ -78,6 +86,7 @@ class StockDetailsViewController: UIViewController {
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: (view.width * 0.7) + 100))
     }
     
+    /// 재무 지표 가져오기
     private func fetchFinancialData() {
         let group = DispatchGroup()
         
@@ -96,8 +105,6 @@ class StockDetailsViewController: UIViewController {
                 }
             }
         }
-        
-        // 재무 지표를 가져옵니다.
         group.enter()
         APICaller.shared.financialMetrics(for: symbol) { [weak self] result in
             defer {
@@ -116,9 +123,9 @@ class StockDetailsViewController: UIViewController {
         group.notify(queue: .main) { [weak self] in
             self?.renderChart()
         }
-        
     }
     
+    /// 특정 유형에 대한 뉴스 가져오기
     private func fetchNews() {
         APICaller.shared.news(for: .company(symbol: symbol)) { [weak self] result in
             switch result {
@@ -133,6 +140,7 @@ class StockDetailsViewController: UIViewController {
         }
     }
     
+    /// 차트 및 측정항목 렌더링
     private func renderChart() {
         // Chart VM | FinancailMetricViewModel
         let headerView = StockDetailHeaderView(frame: CGRect(x: 0, y: 0, width: view.width, height: (view.width * 0.7) + 100))
@@ -145,7 +153,7 @@ class StockDetailsViewController: UIViewController {
             viewModels.append(.init(name: "일중평균거래량", value: "\(metrics.TenDayAverageTradingVolume)"))
         }
         // Configure
-        let change = getChangePercentage(symbol: symbol, data: candleStickData)
+        let change = candleStickData.getPercentage()
         headerView.configure(charViewModel: .init(data: candleStickData.reversed().map{ $0.close },
                                                   showLegned: true,
                                                   showAxis: true,
@@ -153,22 +161,9 @@ class StockDetailsViewController: UIViewController {
                              metricViewModels: viewModels)
         tableView.tableHeaderView = headerView
     }
-    
-    private func getChangePercentage(symbol: String, data: [CandleStick]) -> Double {
-        let latestdate = data[0].date
-        guard let latestClose = data.first?.close,
-              let priorClose = data.first(where: {
-                  !Calendar.current.isDate($0.date, inSameDayAs: latestdate)
-              })?.close else {
-            return 0
-        }
-      
-        let diff = 1 - (priorClose/latestClose)
-        return diff
-    }
-    
 }
 
+// MARK: - TableView
 extension StockDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stories.count
@@ -214,6 +209,7 @@ extension StockDetailsViewController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
+// MARK: - NewsHeaderViewDelegate
 extension StockDetailsViewController: NewsHeaderViewDelegate {
     func newsHeaderViewDidTapAddButton(_ headerView: NewsHeaderView) {
         // Add to watchlist

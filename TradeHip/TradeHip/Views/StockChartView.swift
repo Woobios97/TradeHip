@@ -8,8 +8,9 @@
 import UIKit
 import Charts
 
-class StockChartView: UIView {
-    
+/// 차트를 표시하려면 보기
+final class StockChartView: UIView {
+    /// 차트 보기 ViewModel
     struct ViewModel {
         let data: [Double]
         let showLegned: Bool
@@ -17,6 +18,7 @@ class StockChartView: UIView {
         let fillColor: UIColor
     }
     
+    /// 차트뷰
     private let chartView: LineChartView = {
         let chartView = LineChartView()
         chartView.pinchZoomEnabled = false
@@ -45,11 +47,13 @@ class StockChartView: UIView {
         chartView.frame = bounds
     }
     
-    /// ChartView Reset하기
+    /// 차트뷰 Reset하기
     func reset() {
         chartView.data = nil
     }
     
+    /// Configure VIew
+    /// - Parameter viewModel: 뷰모델
     func configure(with viewModel: ViewModel) {
         var entries = [ChartDataEntry]()
         

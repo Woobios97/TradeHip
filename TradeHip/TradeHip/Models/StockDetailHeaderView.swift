@@ -7,16 +7,17 @@
 
 import UIKit
 
-class StockDetailHeaderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+/// 주식 세부정보 헤더
+final class StockDetailHeaderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    /// 메트릭뷰모델
     private var metricViewModels: [MetricCollectionViewCell.ViewModel] = []
     
     // Subviews
 
-    // chartView
+    /// 차트뷰
     private let chartView = StockChartView()
     
-    // CollectionView
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -28,6 +29,7 @@ class StockDetailHeaderView: UIView, UICollectionViewDelegate, UICollectionViewD
         return collectionView
     }()
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         clipsToBounds = true
@@ -46,6 +48,10 @@ class StockDetailHeaderView: UIView, UICollectionViewDelegate, UICollectionViewD
         collectionView.frame = CGRect(x: 0, y: height - 100, width: width, height: 100)
     }
     
+    /// Configure view
+    /// - Parameters:
+    ///   - chartViewModel: 차트뷰모델
+    ///   - metricViewModels: 메트릭 ViewModel Collection
     func configure(charViewModel: StockChartView.ViewModel, metricViewModels: [MetricCollectionViewCell.ViewModel]) {
         // Update Chart
         chartView.configure(with: charViewModel)

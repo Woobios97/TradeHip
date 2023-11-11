@@ -7,9 +7,12 @@
 
 import Foundation
 
+/// API 호출을 관리하는 객체
 final class APICaller {
-    static let shared = APICaller()
+    /// Singleton
+    public static let shared = APICaller()
     
+    /// Constants
     private struct Constants {
         static let apiKey = "cl57b6hr01qsak9814bgcl57b6hr01qsak9814c0"
         static let sandboxApikey = ""
@@ -17,11 +20,15 @@ final class APICaller {
         static let day: TimeInterval = 3600 * 24
     }
     
+    /// Private constructor
     private init() {}
     
     // MARK: - Public
     
-    // 주식 정보 얻기
+    /// 회사검색
+    /// - Parameters:
+    ///   - query: 쿼리 문자열(기호 또는 이름)
+    ///   - completion: 결과에 대한 콜백
     public func search(query: String, completion: @escaping (Result<SearchResponse, Error>) -> Void) {
         guard let safeQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
@@ -36,6 +43,10 @@ final class APICaller {
         )
     }
     
+    ///  유형별 뉴스 받기
+    /// - Parameters:
+    ///   - type: 회사 또는 주요 뉴스
+    ///   - completion: 결과 콜백
     public func news(for type: NewsViewController.`Type`, completion: @escaping (Result<[NewsStory], Error>) -> Void) {
         switch type {
         case .topStories:
@@ -55,6 +66,11 @@ final class APICaller {
         }
     }
     
+    /// 시장 데이터 가져오기
+    /// - Parameters:
+    ///   - symbol: 주어진 sumbol
+    ///   - numberOfDays: 오늘부터 남은 일수
+    ///   - completion: 결과 콜백
     public func marketData(for symbol: String, numberOfDays: TimeInterval = 7, completion: @escaping (Result<MarketDataResponse, Error>) -> Void) {
         let today = Date().addingTimeInterval(-(Constants.day))
         let prior = today.addingTimeInterval(-(Constants.day * numberOfDays))
@@ -83,8 +99,6 @@ final class APICaller {
             completion: completion)
     }
     
-    // 주식 검색
-    
     // MARK: - Private
     
     private enum Endpoint: String {
@@ -100,6 +114,11 @@ final class APICaller {
         case invalidUrl
     }
     
+    /// 엔드포인트에 대한 URL을 생성해 보세요.
+    /// - Parameters:
+    ///   - endpoint: 생성할 엔드포인트
+    ///   - queryParams: 추가 쿼리 인수
+    /// - Returns: Optional URL
     private func url(for endpoint: Endpoint,
                      queryParams: [String: String] = [:]
     ) -> URL? {
@@ -123,6 +142,11 @@ final class APICaller {
         return URL(string: urlString)
     }
     
+    /// API 호출 수행
+    /// - Parameters:
+    ///   - url: URL
+    ///   - expecting: 데이터를 디코딩할 것으로 예상되는 유형
+    ///   - completion: 결과 콜백
     private func request<T: Codable>(url: URL?, expecting: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         guard let url = url else {
             // 유효하지않은 에러
