@@ -8,7 +8,7 @@
 > 
 
 > **개발 인원:** 1인 개발  
-> **개발 기간:** 2주간 112시간 투자
+> **개발 기간:** 112시간 투자
 
 ## **Development Environment and Using Library**
 
